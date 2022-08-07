@@ -6,7 +6,7 @@ window.addEventListener('resize', (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     let ajax = new XMLHttpRequest();
-    ajax.open("POST", "../private/app.js");
+    ajax.open("POST", "./app.js");
     ajax.send(JSON.stringify(new Array('return')));
     ajax.onload = () => {
         let cookie = ajax.responseText.slice(ajax.responseText.indexOf("=")+1)
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelector("#logout").addEventListener("click", (e) => {
     
     const ajax = new XMLHttpRequest();
-    ajax.open("POST", "../private/app.js");
+    ajax.open("POST", "./app.js");
     ajax.onload = () => {
         socket.close()
         document.location.href = './'
@@ -485,7 +485,7 @@ socket.onmessage = (event) => {
 socket.onclose = (e) => {
     //when the close event is emitted, check if cookie is available **later add authentication thing**
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "../private/app.js")
+    xhr.open("POST", "./app.js")
     xhr.onload = () => {
         let headers = xhr.getAllResponseHeaders();
         if (headers.indexOf("Cookie") === -1){ //this val does not exist
