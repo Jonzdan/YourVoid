@@ -20,7 +20,7 @@ const { compileFunction } = require('vm');
 
 const server = http.createServer((req, res) => {
     if (req.url == '/') { // START
-        fs.readFile('../public/IntroHTML.html', (error, data) => {
+        fs.readFile('./IntroHTML.html', (error, data) => {
             if (error) {
                 //res.writeHead(404);
                 res.write('Error');
@@ -38,8 +38,7 @@ const server = http.createServer((req, res) => {
     }
 
     if (req.url.indexOf('.html') != -1 && req.headers.cookie != undefined && req.headers.cookie.indexOf("valid=") != -1) {
-        //console.log(req.url);
-        fs.readFile('../public/' + req.url, (error, data) => {
+        fs.readFile('./' + req.url, (error, data) => {
             if (error) {
                 res.write('Error');
             }
@@ -53,7 +52,7 @@ const server = http.createServer((req, res) => {
     
     else if (req.url.indexOf('.css') != -1 && req.headers.cookie != undefined && req.headers.cookie.indexOf("valid=") != -1) {
         
-        fs.readFile('../public/css/MessageCSS.css', (error, data) => {
+        fs.readFile('./MessageCSS.css', (error, data) => {
             
             if (error) {
                 //res.writeHead(404);
@@ -62,13 +61,12 @@ const server = http.createServer((req, res) => {
             res.writeHead(200, {"Content-Type" : "text/css" });
             res.write(data);
             res.end();
-            //console.log('this happened 2nd');
         });
     } 
 
     //just regular ass js file requiring-- so to acctually retrieve data another parameter must be set
     else if (req.url.indexOf('.js') != -1 && req.url.indexOf('private') == -1 && req.method == 'GET') { 
-        fs.readFile(`../public${req.url}`, (error, data) => { 
+        fs.readFile(`./${req.url}`, (error, data) => { 
             if (error) {
                 //res.writeHead(404);
                 res.write("Error");
@@ -76,7 +74,6 @@ const server = http.createServer((req, res) => {
             res.write(data);
             res.end();
         });
-        console.log('4', req.url);
           
 
     } 
@@ -258,7 +255,6 @@ const server = http.createServer((req, res) => {
         req.on('error', error => {
             console.error(error);
         })
-        console.log('3');
         
         //res.end();
        
@@ -279,7 +275,7 @@ function generateUniqueHexString(int) {
 
 
 server.on('upgrade', (req, socket, head) => {
-    const path = `/public${req.url}`;
+    const path = `./${req.url}`;
     if (path.indexOf('.html') != -1) {
         webServer.handleUpgrade(req, socket, head, (ws) => {   
             if (req.headers.cookie.indexOf("session") !== -1 && req.headers.cookie.indexOf("valid=") !== -1) {
@@ -301,7 +297,6 @@ server.on('upgrade', (req, socket, head) => {
 
 
 webServer.on('connection', function connect(ws, socket, req) { //ws is the user websocket
-    //console.log(webServer.clients)
     ws.on('message', function message(data) {
         const newData = JSON.parse(data);
         const identity = newData[0];
@@ -385,7 +380,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                             ORDER BY timeSent DESC`, (err, data) => {
                                         if (err) throw err;
                                         if (data[0] === undefined) {
-                                            console.log(123)
                                             data.splice(0,0,'')
                                         }
                                         else {
@@ -435,7 +429,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                             if (loc === -1) break;
                                             if (loc != -1) {
                                                 messages = messages.slice(prevLoc, loc) + "''" + messages.slice(loc+1);
-                                                //console.log(messages);
                                                 prevLoc = loc + 2;
                                             }
                                         }
@@ -538,9 +531,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                 let suggestionList = newData[2];
                 let friendList = newData[3];
                 //check messages
-                console.log(messages);
                 if (/[-$\%^\&\*(){}[\]"'\?\><,.\+=_@!#;\:|\\]/.test(messages)) {
-                    console.log('failed');
                     break;
                 }
                 pool.getConnection((error, con) => {
@@ -561,7 +552,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                     if (err)  throw err;
                                     for (const obj of data) {
                                         if (suggestionList.indexOf(obj['Username']) === -1 && friendList.indexOf(obj['Username']) === -1) { // if the new user isn't in our friends list and if it isn't in our previous suggestions list
-                                            console.log('1\n', newName, data, obj)
                                             newName = obj['Username'];
                                             break;
                                         }
@@ -596,9 +586,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                     }
                                 })
                                 for (const wsObj of webServer.clients) { //need to send an update to the new Friend
-                                        //console.log(wsObj.setCookie, otherUser_uuid)
                                         if (wsObj.setCookie === otherUser_uuid) { // a match
-                                            //console.log(otherUser_uuid);
                                             wsObj.send(JSON.stringify(new Array('addFriendOther', ourUsername)));
                                             break;
                                         }
@@ -623,7 +611,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                         const idUser = data[0]['idUser'];
                         const idUserTo = data[1]['idUser'];
                         let newName = '';
-                        console.log('1\n', data)
                         con.query(`SELECT Username FROM session WHERE uuid != ? `,  uuid ,(err, data) => {
                             if (err)  throw err;
                             con.release();
@@ -781,7 +768,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
 })
 
 server.listen(8080, '0.0.0.0', function() {
-    console.log('Listening to port: ' + 8080);
 })
 
 
