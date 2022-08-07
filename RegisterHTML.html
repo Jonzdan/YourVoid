@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en-US"> <!--  This should be left to the database and once I learn SQL-->
+    <head>
+        <meta charset="utf-8">
+        <title> YourVoid </title>
+        <link rel="stylesheet" href="css/MessageCSS.css">
+        <script src="js/Register.js" defer></script>
+    </head>
+    <body class="signIN">
+            <div class="loginPage">
+                <div class="greyBack">
+                    <h3 class="errorText" id="err1"></h3>
+                    <label for="existUsername" id="eU"> Username: </label> <br>
+                    <input type="text" id="existUsername" name="existUsername"> <br>
+                    <label for="existPass" id="eP"> Password: </label> <br>
+                    <input type="password" id="existPass" name="existPass"><br>
+                    <button type="submit" id="confirmBtn1"> SUBMIT </button> <br>
+                    <a id="goToRegister" href="" > Don't have an account? Click here to register </a> 
+                </div>
+            </div>
+
+            <div class="regPage">
+                <div class="greyBack1">
+                    <h3 class="errorText" id="err2"></h3>
+                    <label for="nUsername" id="nU"> <strong> New Username: </strong></label> <br>
+                    <input type="text" id="nUsername" name="nUsername"> <br>
+                    <label for="nPass" id="nP"> <strong>New Password: </strong></label> <br>
+                    <input type="password" id="nPass" name="nPass"> <br>
+                    <label for="rNPass" id="rNP"> <strong> Re-enter Password: </strong> </label> <br>
+                    <input type="password" id="rNPass" name="rNPass"><br>
+                    <button type="submit" id="confirmBtn2"> SUBMIT </button><br>
+                    <a href="" id="goToLogin"> <em> Click here to go back to login page </em> </a>
+                </div>
+            </div>
+        <div class="successPage">
+            <p> You have successfully registered! Click <a href='' id='returnToLoginAfterRegistering'>here </a> to return to login page </p>
+        </div>
+    </body>
+    
+</html>

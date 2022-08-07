@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title> YourVoid </title>
+        <link rel="stylesheet" href="css/MessageCSS.css">
+        <script src="js/MessageJS.js" defer></script>
+    </head>
+    <body>
+        <div class="mainPageContainer">
+            <div class="topMainPage navbar">
+                <h1 class="mainHeader">  YourVoid </h1>
+                <div class="options">
+                    <div class="dropdown">
+                        <button id="alerts" class=""> 🔔 </button>
+                        <div id="alertsDropDown">
+                        </div>
+                    </div>
+                    <button id="settings"> ⚙ </button>
+                    <button id="switchmodes" > Mode </button>
+                    <button id="logout"> LOGOUT </button>
+                    
+                </div>
+            </div>
+            <!--<hr class="addSpaceBeforeAndAfter"> -->
+             <div class="messageBoxes">
+                <!--<form action="msg.php" method="POST"> -->
+                    <div class="textBox">
+                        <label for="textbox"></label>
+                        <input type="text" id="textbox" name="textbox" placeholder="Enter message here..." onkeydown = "checkEnter(event, this)">
+                    </div>
+                <!-- </form> -->
+                    <div class="talkingTo"></div>
+                    <div class="messageHistory" id="history">
+                        
+                    </div>
+             </div>
+             <div class="sidePanelFriends">
+                 <h2> Friends </h2>
+                 <hr>
+                 <div id="friendBox">
+                    
+                 </div>
+                 
+             </div>
+             <div class="sidePanelSuggestions">
+                
+                 <div class="searchBar">
+                     <h2> Suggestions </h2>
+                     <hr class="hey">
+                     <label for="search"></label>
+                     <input type="text" placeholder="Search..." id="search" name="search">
+                 </div>
+                 <br>
+                 <div class="suggestionBox"></div>
+             </div>
+             <footer class="contact">
+                <h3 id="user"> Current User: </h3>
+                <div>
+                    <h4> Contact: </h4> 
+                    <h5> Creator: jonzdan </h5>
+                    <h5> Email: jonzdan98@gmail.com </h5>
+                    
+                </div>
+                
+             </footer>
+                
+        </div>
+           
+    </body>
+</html>
