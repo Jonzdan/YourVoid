@@ -19,7 +19,7 @@ catch (error) {
 
 document.addEventListener("DOMContentLoaded", () => {
     let ajax = new XMLHttpRequest();
-    ajax.open("POST", "../private/app.js");
+    ajax.open("POST", "./app.js");
     ajax.setRequestHeader('Content-Type', 'application/json')
     ajax.send(JSON.stringify(new Array('return')));
     ajax.onload = () => {
@@ -115,7 +115,7 @@ function ajaxFunc1(e) {
      //so there are no issues
     if (clientSideVal(parameter)) { // passed
         const xhr = new XMLHttpRequest();
-            xhr.open("POST", "../private/app.js");
+            xhr.open("POST", "./app.js");
             xhr.onload = () => { //response should be a simple true or false (boolean)
                 console.log(xhr.response);
                 if (xhr.responseText === 'true') { //if true, so valid username and pass, then show page saying "you have successfully registered"
