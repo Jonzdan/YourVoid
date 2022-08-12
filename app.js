@@ -81,9 +81,8 @@ const server = http.createServer((req, res) => {
     //just regular ass js file requiring-- so to acctually retrieve data another parameter must be set
     else if (req.url.indexOf('.js') != -1 && req.url.indexOf('app') == -1 && req.method == 'GET') { 
         fs.readFile(`./${req.url}`, (error, data) => { 
-            console.log(req.url)
             if (error) {
-                res.statusCode = 503;
+                res.statusCode = 501;
                 res.end()
             }
             res.writeHead(200, {"Content-Type" : "text/javascript"});
