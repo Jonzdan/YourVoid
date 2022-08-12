@@ -17,8 +17,6 @@ const { WebSocketServer } = require('ws');
 const { getSystemErrorMap } = require('util');
 const { compileFunction } = require('vm');
 
-
-
 const server = http.createServer((req, res) => {
     if (req.url == '/') { // START
         fs.readFile('./IntroHTML.html', (error, data) => {
@@ -44,8 +42,14 @@ const server = http.createServer((req, res) => {
                 res.write('Error');
             }
             else {
-                res.writeHead(200, {'Content-Type': 'text/html'});
-                res.end(data);
+                if (data[0] === undefined) {
+                    res.statusCode = 504;
+                    res.end()
+                }
+                else {
+                    res.writeHead(200, {'Content-Type': 'text/html'});
+                    res.end(data);
+                }
             }
             
         });
@@ -56,12 +60,18 @@ const server = http.createServer((req, res) => {
         fs.readFile('./MessageCSS.css', (error, data) => {
             
             if (error) {
-                //res.writeHead(404);
+                res.setStatusCode = 504;
                 res.write('Error');
             }
             res.writeHead(200, {"Content-Type" : "text/css" });
-            res.write(data);
-            res.end();
+            if (data[0] === undefined) {
+                res.statusCode = 504;
+                res.end()
+            }
+            else {
+                res.write(data);
+                res.end();
+            }
         });
     } 
 
@@ -69,11 +79,18 @@ const server = http.createServer((req, res) => {
     else if (req.url.indexOf('.js') != -1 && req.url.indexOf('app') == -1 && req.method == 'GET') { 
         fs.readFile(`./${req.url}`, (error, data) => { 
             if (error) {
-                //res.writeHead(404);
+                res.statusCode = 504;
                 res.write("Error");
             }
-            res.write(data);
-            res.end();
+            res.writeHead(200, {"Content-Type" : "text/javascript"});
+            if (data[0]) == undefined) {
+                res.statusCode = 504;
+                res.end();
+            }
+            else {
+                res.write(data);
+                res.end();
+            }
         });
           
 
@@ -306,7 +323,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
         let csrf = ws.csrf;
         if (csrf === undefined || uuid === undefined || req.headers.cookie.slice(req.headers.cookie.indexOf("=")+1, req.headers.cookie.indexOf(";")) !== csrf || req.headers.cookie.indexOf("session=") === -1) {
             socket.destroy();
-        }else {
+        } else {
         switch (identity) {
             case('begin'): //POOL FRIENDS LIST, MSG HISTORY, ETC.
                 pool.getConnection((error, con) => {
@@ -404,7 +421,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                 })
                 break;
             case('msg'): 
-                //store data in db and then suck a dick bro
                 //then write back actual msgs
                 messages = messages.slice(0, 200);
                 pool.getConnection((error, con) => {
