@@ -247,7 +247,7 @@ function removeAddFriendBox(e) {
     footer.removeEventListener('click', removeAddFriendBox);
 }
 
-const socket = new WebSocket('ws://localhost:8080/MessageHTML.html');
+const socket = new WebSocket('ws://yourvoid.herokuapp.com/MessageHTML.html');
 
 socket.onopen = (event) => {
     socket.send(JSON.stringify(new Array('begin')));
