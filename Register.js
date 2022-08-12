@@ -3,18 +3,15 @@ goRegister.addEventListener("click", preventLink);
 const loginBtn = document.querySelector("#confirmBtn1"); //GET REQUEST FOR USER/PASS IN LOGINPAGE
 try {
 loginBtn.addEventListener("click", ajaxFunc);
-console.log('added');
 }
-catch { console.log(error) }
+catch {  }
 const registerBtn = document.querySelector("#confirmBtn2"); //POST REQUEST FOR USER IN REGISTER PAGE
 registerBtn.addEventListener("click", ajaxFunc1);
 const backTologin = document.querySelector("#goToLogin");
 try {
     backTologin.addEventListener("click", changeToLogin);
-    console.log('yay'); //so event listener is added
 }
 catch (error) {
-    console.log(error);
 }
 document.addEventListener("DOMContentLoaded", (e) => {
     let a = document.querySelector("body").children;
@@ -125,7 +122,6 @@ function ajaxFunc1(e) {
         const xhr = new XMLHttpRequest();
             xhr.open("POST", "./app.js");
             xhr.onload = () => { //response should be a simple true or false (boolean)
-                console.log(xhr.response);
                 if (xhr.responseText === 'true') { //if true, so valid username and pass, then show page saying "you have successfully registered"
                     document.querySelector(".successPage").style.display = "block";
                     document.querySelector(".regPage").style.display = "none";
@@ -187,7 +183,6 @@ function ajaxFunc(e) {
     ajax.onload = () => { // 
         //so the response is true/false
         //get user and pass
-        console.log(ajax.response);
         if (ajax.responseText === 'true') { //there was a correct match 
             document.location.href="MessageHTML.html";
 
