@@ -363,6 +363,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                             }
                             let newFriends = ['suggestions'];
                             con.query(q, (err, data) => {
+                                console.log(data);
                                 if(err) throw err;
                                 for (let i = 0; i < data.length; i++) {
                                     newFriends.push(data[i]['Username']);
