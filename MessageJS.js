@@ -276,7 +276,6 @@ socket.onmessage = (event) => {
             }
             break;
         case('activeChat'):
-            console.log(other)
             let us = other[0];
             let them = other.slice(1,2);
             document.querySelector("#user").textContent = 'Current User: ' + us;
@@ -373,9 +372,7 @@ socket.onmessage = (event) => {
             break;
         case('addFriend'): 
             let addedUser = other[0];
-            console.log('added: ', addedUser)
             let maybeNewSuggestion = other[1]; 
-            console.log(maybeNewSuggestion);
             //add the friend
             document.querySelector('#friendBox').insertAdjacentHTML('beforeend', `<button class='aFriendPanel'> </button>`);
             document.querySelector('#friendBox').lastElementChild.textContent = addedUser;
@@ -389,7 +386,6 @@ socket.onmessage = (event) => {
                 }
             }
             else { 
-                console.log(addedUser);
                 var sugg = document.querySelector('.suggestionBox').children;
                 for (const button of sugg) {
                     if (button.textContent === addedUser) {
@@ -486,7 +482,6 @@ socket.onmessage = (event) => {
             document.location.href = './505.html';
             break;
         case('Error'):
-            console.log('error buddy');
             break;
 }
     }
@@ -520,7 +515,6 @@ function addFriendRequestDiv(loc, msg, name) {
     for (const f of friendChildren) {
         fr.push(f.textContent);
     }
-    console.log(fr, newPpl)
     document.querySelector(loc).insertAdjacentHTML("beforeend", `<div class='friendRequestMessage'></div>`);
     document.querySelector(loc).lastElementChild.insertAdjacentHTML("beforeend", `<button class='subMessage'></button>`);
     document.querySelector(loc).lastElementChild.lastElementChild.textContent = msg;
@@ -556,16 +550,7 @@ function checkEnter(e) {
     if (e.code == "Enter" && document.querySelector("#textbox").value.length > 0) {
         let chatBoxMessage = document.querySelector("#textbox");
         const message = chatBoxMessage.value;
-        //console.log(message);
         chatBoxMessage.value = "";
-        //now textcontent the message
-        
-        //document.querySelector(".messageHistory").insertAdjacentHTML("beforeend", val);
-        //document.getElementById(this.uniqueId.toString()).textContent = message;
-     
-        //console.log(this.uniqueId);
-
-        //so if enter is hit
         socket.send(JSON.stringify(new Array('msg', message)));
 
 
@@ -575,24 +560,6 @@ function checkEnter(e) {
 function checkForTypeInSearch(e) {
     
 }
-//rows: 10fr/11.7fr
-//cols: 1fr/8fr
-/*function mousePos(e) {
-    let targetAreaX1 = window.innerWidth * (7/8);
-    let targetAreaX2 = window.innerWidth;
-    let targetAreaY1 = window.innerHeight * (1/11.7);
-    let targetAreaY2 = window.innerHeight * (11/11.7);
-    let diff = targetAreaY2 - targetAreaY1;
-    let y2 = diff * (1/17);
-    let newArea = targetAreaY1 + y2;
-    let diff2 = targetAreaY2 - newArea;
-    let ratio = diff2/10;
-    console.log(`ratio : ${ratio} AND beginY: ${newArea}`)
-    
-    console.log(`Coordinates are: ${e.pageX} and ${e.pageY}; targets are ${targetAreaX1}-${targetAreaX2} by ${targetAreaY1}-${targetAreaY2}`);
-} */
-
-
  //k
  //K
 
@@ -612,18 +579,6 @@ function errorMsg(ajax) {
             });
 }
 
-
-
-
-
-
-
-/* function changePage2(e) //this happened basically
-{
-    document.location.href = "RegisterHTML.html";
-    registerBtn.removeEventListener();
-
-} */
 
 
 
