@@ -21,8 +21,8 @@ const server = http.createServer((req, res) => {
     if (req.url == '/') { // START
         fs.readFile('./IntroHTML.html', (error, data) => {
             if (error) {
-                //res.writeHead(404);
-                res.write('Error');
+                res.statusCode = 503;
+                res.end();
             }
             //res.setHeader('Set-Cookie',`valid=${generateUniqueHexString}`)
             if (req.headers.cookie === undefined || req.headers.cookie.indexOf("valid=") === -1  ) {
@@ -61,8 +61,9 @@ const server = http.createServer((req, res) => {
         fs.readFile('./MessageCSS.css', (error, data) => {
             
             if (error) {
+                console.log(error)
                 res.setStatusCode = 503;
-                res.write('Error');
+                res.end()
             }
             res.writeHead(200, {"Content-Type" : "text/css" });
             if (data === undefined) {
@@ -83,7 +84,7 @@ const server = http.createServer((req, res) => {
             console.log(req.url)
             if (error) {
                 res.statusCode = 503;
-                res.write("Error");
+                res.end()
             }
             res.writeHead(200, {"Content-Type" : "text/javascript"});
             if (data == undefined) {
