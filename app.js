@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
                 res.write('Error');
             }
             else {
-                if (data[0] === undefined) {
+                if (data === undefined) {
                     res.statusCode = 504;
                     res.end()
                 }
@@ -64,7 +64,7 @@ const server = http.createServer((req, res) => {
                 res.write('Error');
             }
             res.writeHead(200, {"Content-Type" : "text/css" });
-            if (data[0] === undefined) {
+            if (data === undefined) {
                 res.statusCode = 504;
                 res.end()
             }
@@ -84,7 +84,7 @@ const server = http.createServer((req, res) => {
                 res.write("Error");
             }
             res.writeHead(200, {"Content-Type" : "text/javascript"});
-            if (data[0] == undefined) {
+            if (data == undefined) {
                 res.statusCode = 504;
                 res.end();
             }
