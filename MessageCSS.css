@@ -87,10 +87,6 @@
     display:none;
 }
 
-.shrinkIntro {
-    height: 100%;
-}
-
 .navbar {
     top: 0;
     background-image: linear-gradient(75deg, #d45839, #c04b4b,#d45839, #c04b4b,#d45839, #c04b4b);
