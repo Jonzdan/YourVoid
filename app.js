@@ -84,7 +84,7 @@ const server = http.createServer((req, res) => {
                 res.write("Error");
             }
             res.writeHead(200, {"Content-Type" : "text/javascript"});
-            if (data[0]) == undefined) {
+            if (data[0] == undefined) {
                 res.statusCode = 504;
                 res.end();
             }
