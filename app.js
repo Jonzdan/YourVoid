@@ -5,7 +5,6 @@ const fs = require('fs');
 const Event = require("./event.js");
 const { triggerAsyncId } = require('async_hooks');
 const { userInfo } = require('os');
-const event = new Event();
 const pool = require('./connection.js');
 const { resolve } = require('path');
 const crypto = require('crypto');
