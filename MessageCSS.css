@@ -24,7 +24,9 @@
 .reverse_invert_color {
     filter: invert(0);
 }
-
+.shrinkIntro {
+    position: static;
+}
 .stars5 {
     text-align: center;
     font-size: 6em;
