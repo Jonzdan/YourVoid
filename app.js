@@ -26,8 +26,9 @@ const server = http.createServer((req, res) => {
             }
             //res.setHeader('Set-Cookie',`valid=${generateUniqueHexString}`)
             if (req.headers.cookie === undefined || req.headers.cookie.indexOf("valid=") === -1  ) {
-                 res.writeHead(200, {'Set-Cookie': `valid=${generateUniqueHexString(100)}; path='/'; SameSite=Lax; HttpOnly`});
+                 res.writeHead(200, {'Set-Cookie': `valid=${generateUniqueHexString(100)}; path='/'; SameSite=Lax; HttpOnly; Secure`});
             }
+            res.statusCode = 200;
             res.write(data);
             res.end();
             
@@ -60,15 +61,16 @@ const server = http.createServer((req, res) => {
         fs.readFile('./MessageCSS.css', (error, data) => {
             
             if (error) {
-                res.setStatusCode = 504;
+                res.setStatusCode = 503;
                 res.write('Error');
             }
             res.writeHead(200, {"Content-Type" : "text/css" });
             if (data === undefined) {
-                res.statusCode = 504;
+                res.statusCode = 500;
                 res.end()
             }
             else {
+                res.statusCode = 200;
                 res.write(data);
                 res.end();
             }
@@ -80,15 +82,16 @@ const server = http.createServer((req, res) => {
         fs.readFile(`./${req.url}`, (error, data) => { 
             console.log(req.url)
             if (error) {
-                res.statusCode = 504;
+                res.statusCode = 503;
                 res.write("Error");
             }
             res.writeHead(200, {"Content-Type" : "text/javascript"});
             if (data == undefined) {
-                res.statusCode = 504;
+                res.statusCode = 500;
                 res.end();
             }
             else {
+                res.statusCode = 200;
                 res.write(data);
                 res.end();
             }
