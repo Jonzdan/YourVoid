@@ -6,7 +6,15 @@ document.querySelector('#aboutUs').addEventListener("click", (e) => {
 document.querySelector("#introSignIn").addEventListener("click", changePage1);
 document.querySelector("#here").addEventListener("click", changePage1);
 document.addEventListener("DOMContentLoaded", setViewPort);
-
+document.addEventListener("DOMContentLoaded", (e) => {
+    let a = document.querySelector("body").children;
+    for (let i = a.length - 1; i>0; i--) {
+        if (a[i].style.cssText === 'position: static !important;') {
+            a[i].remove()
+            break;
+        }
+    }
+})
 //add eventlisteners for every object for animation end
 document.querySelector("#welcomeText").addEventListener("animationstart", one)
 
