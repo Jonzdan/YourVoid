@@ -16,7 +16,15 @@ try {
 catch (error) {
     console.log(error);
 }
-
+document.addEventListener("DOMContentLoaded", (e) => {
+    let a = document.querySelector("body").children;
+    for (let i = a.length - 1; i>0; i--) {
+        if (a[i].style.cssText === 'position: static !important;') {
+            a[i].remove()
+            break;
+        }
+    }
+})
 document.addEventListener("DOMContentLoaded", () => {
     let ajax = new XMLHttpRequest();
     ajax.open("POST", "./app.js");
