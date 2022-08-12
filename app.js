@@ -768,7 +768,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
 
 })
 
-server.listen(process.env.PORT, '0.0.0.0', function() {
+server.listen(process.env.PORT || 3000, '0.0.0.0', function() {
 })
 
 
