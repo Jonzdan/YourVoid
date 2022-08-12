@@ -2,7 +2,6 @@ const EventEmitter = require('events');
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const Event = require("./event.js");
 const { triggerAsyncId } = require('async_hooks');
 const { userInfo } = require('os');
 const pool = require('./connection.js');
