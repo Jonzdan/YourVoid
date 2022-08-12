@@ -32,7 +32,6 @@ function one(e) {
 function setViewPort(e) {
     let x = window.innerWidth;
     let y = window.innerHeight;
-    console.log(x,y);
     //document.querySelector("body").style.maxWidth = x + 'px';
     //document.querySelector("body").style.maxHeight = y + 'px';
     document.removeEventListener("DOMContentLoaded", setViewPort);
