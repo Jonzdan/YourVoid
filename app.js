@@ -362,6 +362,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                 q = `SELECT Username FROM user WHERE ${q} AND idUser != '${idUser}' LIMIT 10`;
                             }
                             let newFriends = ['suggestions'];
+                            console.log(q)
                             con.query(q, (err, data) => {
                                 console.log(data);
                                 if(err) throw err;
