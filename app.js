@@ -14,6 +14,18 @@ const ws = require('ws');
 const { WebSocketServer } = require('ws');
 const { getSystemErrorMap } = require('util');
 const { compileFunction } = require('vm');
+const aws = require('aws-sdk');
+const s3_bucket = process.env.BUCKET_NAME;
+const my_key = 'demo.PNG';
+const signedUrlExpireSec = 60
+const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    signatureVersion: 'v4',
+    region: 'us-east-1',
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
+})
+
+
 
 const server = http.createServer((req, res) => {
     if (req.url == '/') { // START
@@ -263,6 +275,15 @@ const server = http.createServer((req, res) => {
                 case('authenticate'):
                     res.write('');
                     res.end();
+                    break;
+                case('getImg'):
+                    const url = s3.getSignedUrl('getObject', {
+                        Bucket: s3_bucket,
+                        Key: my_key,
+                        Expires: signedUrlExpireSec
+                    })
+                    res.write(JSON.stringify(url));
+                    res.end()
                     break;
                 default: 
                     res.end();
