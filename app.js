@@ -282,7 +282,7 @@ const server = http.createServer((req, res) => {
                         Key: my_key,
                         Expires: signedUrlExpireSec
                     })
-                    res.write(JSON.stringify(url));
+                    res.write(url);
                     res.end()
                     break;
                 default: 
