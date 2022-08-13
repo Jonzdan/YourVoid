@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
     }
 })
+document.addEventListener("DOMContentLoaded", (e) => {
+    const ajax = new XMLHttpRequest();
+    ajax.open("POST", "./app.js");
+    ajax.onload = () => {
+        const url = ajax.responseText;
+        document.querySelector("#msgDemo").src = url
+    }
+    ajax.send(JSON.stringify(new Array('getImg')));
+})
 //add eventlisteners for every object for animation end
 document.querySelector("#welcomeText").addEventListener("animationstart", one)
 
