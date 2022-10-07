@@ -1,2 +1,2 @@
 # YourVoid
-basic real time app
+Real-Time Messaging App
