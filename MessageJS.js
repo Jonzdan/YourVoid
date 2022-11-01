@@ -342,6 +342,7 @@ socket.onmessage = (event) => {
             while (histChildren.length != 0) {
                 histChildren[0].remove();
             }
+            console.log(other)
             if (other != undefined && other.length > 0) { //valid messages
                 let theirUsername = '';
                 for(let i = other.length-1; i >= 0; i--) {
@@ -349,6 +350,7 @@ socket.onmessage = (event) => {
                     const uuid = other[i]['uuid'];
                     const time = other[i]['timeSent'];
                     const content = other[i]['Content'];
+                    console.log(uuid, myID, content, username)
                     //if uuids match, its from us
                     //if uuids dont match, its from someone else
                     if (myID !== uuid) { //a match (other person)
