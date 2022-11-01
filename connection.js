@@ -1,11 +1,10 @@
 const mysql2 = require('mysql2');
 const pool = mysql2.createPool({
     connectionLimit: 1000,
-    host: 'us-cdbr-east-06.cleardb.net',
-    user: 'ba21c6470393b0',
-    password: 'aca45a73',
-    database: 'heroku_aa6c97d55ecec6f',
+    host: process.env.HOST_NAME,
+    user: process.env.USER_NAME,
+    password: process.env.PASS_NAME,
+    database: process.env.DATABASE,
 })
 
-//FASDHvnauycHHAFJSHDvlASDBJCA MYSQL MASTER PASSWORD
 module.exports = pool;
