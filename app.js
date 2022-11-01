@@ -733,7 +733,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                     con.query(`UPDATE connections SET STATUS = 1 WHERE idUser = '${idUser}' AND idUserTo = '${idUserTo}' AND STATUS = 0`, (err, data) => {
                                         if (err) throw err;
                                     })
-                                    con.query(`SELECT * FROM message_history AS mh
+                                    con.query(`SELECT s.uuid, s.Username, mh.Content, mh.timeSent FROM message_history AS mh
                                             LEFT JOIN session AS s
                                                 ON s.idUser = mh.idUser
                                             WHERE (mh.idUser = '${idUser}' AND mh.idUserTo = '${idUserTo}') OR (mh.idUser = '${idUserTo}' AND mh.idUserTo = '${idUser}') 
@@ -747,7 +747,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                             console.log(data)
                                             data.splice(0,0,uuid);
                                             data.splice(0,0,'changeChat');
-                                            ws.send(JSON.stringify(new Array(data[0], data[1], data[2]['Username'], data[2]['Content'], data[2]['timeSent'])));
+                                            ws.send(JSON.stringify(new Array(data));
                                             con.release();
                                         }
                                         
