@@ -334,6 +334,7 @@ socket.onmessage = (event) => {
             w.lastElementChild.textContent = other[0];
             break;
         case('changeChat'):
+            console.log(other)
             //either nothing is done or there are messages to load
             let history = document.querySelector(".messageHistory");
             let myID = other[0];
@@ -342,7 +343,7 @@ socket.onmessage = (event) => {
             while (histChildren.length != 0) {
                 histChildren[0].remove();
             }
-            console.log(other)
+            
             if (other != undefined && other.length > 0) { //valid messages
                 let theirUsername = '';
                 for(let i = other.length-1; i >= 0; i--) {
