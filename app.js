@@ -483,7 +483,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                             }
                                         })
                                         console.log(idUser)
-                                        con.query(`INSERT INTO message_history VALUES('${idUser}', '${idUserTo}', ? , DEFAULT)`, messages, (e, d) => { 
+                                        con.query(`INSERT INTO message_history VALUES(idUser, idUserTo, ? , DEFAULT)`, messages, (e, d) => { 
                                             if (e) throw e; con.release(); ws.send(JSON.stringify(new Array('msg','me', temp))); 
                                         })
                                     }
