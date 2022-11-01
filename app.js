@@ -459,6 +459,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                         ws.send(JSON.stringify('Error'));
                                     }
                                     else {
+                                        console.log(data);
                                         const idUser = data[0]['idUser'];
                                         const idUserTo = data[0]['idUserTo'];
                                         let prevLoc = 0;
