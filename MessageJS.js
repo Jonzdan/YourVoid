@@ -334,7 +334,6 @@ socket.onmessage = (event) => {
             w.lastElementChild.textContent = other[0];
             break;
         case('changeChat'):
-            console.log('other' + other)
             //either nothing is done or there are messages to load
             let history = document.querySelector(".messageHistory");
             let myID = other[0];
@@ -346,13 +345,11 @@ socket.onmessage = (event) => {
             
             if (other != undefined && other.length > 0) { //valid messages
                 let theirUsername = '';
-                console.log('entered here');
                 for(let i = other.length-1; i >= 0; i--) {
                     const username = other[i]['Username'];
                     const uuid = other[i]['uuid'];
                     const time = other[i]['timeSent'];
                     const content = other[i]['Content'];
-                    console.log(uuid, myID, content, username)
                     //if uuids match, its from us
                     //if uuids dont match, its from someone else
                     if (myID !== uuid) { //a match (other person)
