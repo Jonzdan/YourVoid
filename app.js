@@ -747,7 +747,7 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                             console.log(data)
                                             data.splice(0,0,uuid);
                                             data.splice(0,0,'changeChat');
-                                            ws.send(JSON.stringify(new Array(data['Username'], data['Content'], data['timeSent'])));
+                                            ws.send(JSON.stringify(new Array(data[0], data[1], data[2]['Username'], data[2]['Content'], data[2]['uuid'], data['timeSent'])));
                                             con.release();
                                         }
                                         
