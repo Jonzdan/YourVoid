@@ -87,7 +87,7 @@ const server = http.createServer((req, res) => {
         });
     } 
 
-    //just regular ass js file requiring-- so to acctually retrieve data another parameter must be set
+    //just regular js file requiring-- so to acctually retrieve data another parameter must be set
     else if (req.url.indexOf('.js') != -1 && req.url.indexOf('app') == -1 && req.method == 'GET') { 
         fs.readFile(`./${req.url}`, (error, data) => { 
             if (error) {
@@ -596,7 +596,6 @@ webServer.on('connection', function connect(ws, socket, req) { //ws is the user 
                                     }
                                     
                                     (newName === '') ? ws.send(JSON.stringify(new Array('addFriend', messages))) : ws.send(JSON.stringify(new Array('addFriend', messages, newName)))
-                                    //after we send the updates, send new bitchass SHEEE
                                     
                                 })
                                 con.query(`INSERT INTO friend_request VALUES('${idUser}', '${idUser}', '${messages} is now your friend.','standard', DEFAULT, DEFAULT)`, (err, data) => {
